@@ -6,11 +6,12 @@ It defines DB schema using [Rails DSL](http://guides.rubyonrails.org/migrations.
 (like Chef/Puppet)
 
 [![Gem Version](https://badge.fury.io/rb/ridgepole.svg)](http://badge.fury.io/rb/ridgepole)<!--
-[![Unstable Version](https://img.shields.io/badge/unstable-0.7.3.beta3-green.svg?longCache=true&style=flat)](https://rubygems.org/gems/ridgepole/versions/0.7.3.beta3) -->
+[![Unstable Version](https://img.shields.io/badge/unstable-0.7.5.beta2-green.svg?longCache=true&style=flat)](https://rubygems.org/gems/ridgepole/versions/0.7.5.beta2)
+-->
 [![Build Status](https://travis-ci.org/winebarrel/ridgepole.svg?branch=0.7)](https://travis-ci.org/winebarrel/ridgepole)
 [![Coverage Status](https://coveralls.io/repos/github/winebarrel/ridgepole/badge.svg?branch=0.7)](https://coveralls.io/github/winebarrel/ridgepole?branch=0.7)
 
-**ChangeLog**
+<details><summary>ChangeLog</summary>
 
 * `>= 0.4.8`
   * `activerecord-mysql-unsigned` is now optional. Please pass `--enable-mysql-unsigned` after you install [activerecord-mysql-unsigned](https://github.com/waka/activerecord-mysql-unsigned) if you want to use.
@@ -89,6 +90,11 @@ It defines DB schema using [Rails DSL](http://guides.rubyonrails.org/migrations.
   * Support primary key adding/dropping ([issue#246](https://github.com/winebarrel/ridgepole/issues/246))
 * `>= 0.7.4`
   * Fix `add_foreign_key` options ([issue#250](https://github.com/winebarrel/ridgepole/issues/250))
+* `>= 0.7.5`
+  * Fix polymorphic options ([pull#263](https://github.com/winebarrel/ridgepole/pull/263))
+  * Fix `--mysql-use-alter` option ([pull#246](https://github.com/winebarrel/ridgepole/pull/264))
+  * Fix Database URI parsing ([pull#265](https://github.com/winebarrel/ridgepole/pull/265))
+</details>
 
 ## Installation
 

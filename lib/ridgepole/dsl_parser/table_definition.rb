@@ -14,7 +14,7 @@ module Ridgepole
 
         @__definition[name] = {
           type: type,
-          options: options
+          options: options,
         }
       end
 
@@ -87,7 +87,7 @@ module Ridgepole
         unsigned_integer: [:integer, { unsigned: true }],
         unsigned_bigint: [:bigint, { unsigned: true }],
         unsigned_float: [:float, { limit: 24, unsigned: true }],
-        unsigned_decimal: [:decimal, { precision: 10, unsigned: true }]
+        unsigned_decimal: [:decimal, { precision: 10, unsigned: true }],
       }.freeze
 
       # XXX:
@@ -124,12 +124,15 @@ module Ridgepole
       def references(*args)
         options = args.extract_options!
         polymorphic = options.delete(:polymorphic)
+        polymorphic_options = polymorphic.is_a?(Hash) ? polymorphic : {}
+        # https://github.com/rails/rails/blob/5-2-1/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L167
+        polymorphic_options.merge!(options.slice(:null, :first, :after))
         index_options = options.key?(:index) ? options.delete(:index) : true
         type = options.delete(:type) || DEFAULT_PRIMARY_KEY_TYPE
 
         args.each do |col|
           column("#{col}_id", type, options)
-          column("#{col}_type", :string, polymorphic.is_a?(Hash) ? polymorphic : options) if polymorphic
+          column("#{col}_type", :string, polymorphic_options) if polymorphic
           if index_options
             columns = polymorphic ? ["#{col}_type", "#{col}_id"] : ["#{col}_id"]
             index(columns, index_options.is_a?(Hash) ? index_options : {})
